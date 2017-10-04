@@ -1,6 +1,6 @@
 # docker-sqlmap
 
-Sqlmap container with all optionals dependencies.
+Sqlmap Docker container with all optionals dependencies.
 
 ## Pulling the image
 
