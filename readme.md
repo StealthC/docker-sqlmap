@@ -2,7 +2,7 @@
 
 Sqlmap container with all optionals dependencies.
 
-### Pulling the image
+## Pulling the image
 
 ```
 docker pull stealthc/sqlmap
@@ -14,7 +14,9 @@ docker pull stealthc/sqlmap
 docker run --rm -it -v "$(pwd)/:/work/" stealthc/sqlmap -u http://vuln.site.com/i?=1 -p i
 ```
 
-Where `/work/` is the default directory of output logs, databases and dumps. In this example, the current directory `{?PWD}` is mounted at the desired place.
+Where `/work/` is the container's default directory of the output logs, databases and dumps.
+
+In this example, the current directory `{?PWD}` is mounted at the desired place.
 
 ## Authors
 
