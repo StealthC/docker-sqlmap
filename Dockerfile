@@ -39,7 +39,15 @@ RUN buildDeps=' \
 && rm -rf /var/tmp/* \
 && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /work
+RUN chmod 755 /opt/sqlmap/sqlmap.py \
+&& mkdir /work \
+&& adduser -q --gecos "" --disabled-password --shell /bin/bash user \
+&& mkdir /home/user/.sqlmap \
+&& ln -s /home/user/.sqlmap /work \
+&& chown -R user /work \
+&& chown -R user /home/user
+
+USER user
 
 WORKDIR /work
 
