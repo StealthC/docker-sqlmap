@@ -25,14 +25,14 @@ RUN buildDeps=' \
 && python get-pip.py \
 	--disable-pip-version-check \
     --no-cache-dir \
-&& pip install --no-cache-dir cython
+&& pip install --no-cache-dir cython \
 && pip install --no-cache-dir\
     pymysql \
     cx_Oracle \
     ibm_db\
     jaydebeapi \
     websocket-client \
-    pyodbc
+    pyodbc \
     git+https://github.com/pymssql/pymssql.git \
 && git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git /opt/sqlmap \
 && apt-get purge -y --auto-remove $buildDeps \
