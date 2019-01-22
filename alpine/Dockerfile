@@ -9,8 +9,8 @@ RUN set -ex; \
 	    unixodbc-dev \
 	    libffi-dev \
 	; \
+    pip install cython; \
     pip install \
-        cython \
         pymssql \
         pymysql \
         cx_oracle \
