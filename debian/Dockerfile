@@ -26,8 +26,8 @@ RUN buildDeps=' \
 #&& python get-pip.py \
 #	--disable-pip-version-check \
 #    --no-cache-dir \
-&& pip install --no-cache-dir cython \
-&& pip install --no-cache-dir\
+&& pip install cython \
+&& pip install \
     pymysql \
     cx_Oracle \
     ibm_db\

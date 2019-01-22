@@ -9,8 +9,14 @@ RUN set -ex; \
 	    unixodbc-dev \
 	    libffi-dev \
 	; \
-    pip install cython; \
-    pip install \
+    apk add --no-cache \
+	    freetds \
+	    postgresql \
+	    unixodbc \
+	    libffi \
+	; \
+    pip2 install cython; \
+    pip2 install \
         pymssql \
         pymysql \
         cx_oracle \
@@ -19,7 +25,8 @@ RUN set -ex; \
         JPype1 \
         pyodbc \
         impacket \
-        python-ntlm; \
+        python-ntlm \
+        websocket-client; \
     apk add --no-cache curl; \
 	apk del .build-deps; \
     mkdir /work
@@ -32,9 +39,9 @@ RUN set -ex; \
     mkdir /usr/src/sqlmap; \
     curl -o sqlmap.tar.gz -fSL "https://github.com/sqlmapproject/sqlmap/archive/${SQLMAP_VERSION}.tar.gz"; \
     tar -xvf sqlmap.tar.gz --strip 1 -C /usr/src/sqlmap; \
-    rm sqlmap.tar.gz; \
+    rm sqlmap.tar.gz
 
-ENTRYPOINT ["python", "/usr/src/sqlmap/sqlmap.py", "--output-dir=/work"]
+ENTRYPOINT ["python2", "/usr/src/sqlmap/sqlmap.py", "--output-dir=/work"]
 
 CMD ["-hh"]
 
