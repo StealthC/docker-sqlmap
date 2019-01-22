@@ -1,12 +1,22 @@
 # docker-sqlmap
 
-Sqlmap Docker container with all optionals dependencies.
+Sqlmap Docker container with maximum optionals dependencies.
 
 ## Pulling the image
 
 ```
 docker pull stealthc/sqlmap
+or docker pull stealthc/sqlmap:alpine
 ```
+
+Note: the alpine version don't have the following dependencies:
+- python-kinterbasdb
+- websocket-client
+- ibm-db
+
+
+Current sqlmap version:
+- alpine: 1.3
 
 ## Typical usage
 
