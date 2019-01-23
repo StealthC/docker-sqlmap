@@ -13,7 +13,6 @@ RUN buildDeps=' \
 && apt-get update && apt-get install -y --no-install-recommends\
     ca-certificates \
     python \
-    python-pip \
     python-psycopg2 \
     python-impacket \
     python-kinterbasdb \
@@ -22,10 +21,8 @@ RUN buildDeps=' \
     libsybdb5 \
     unixodbc \
     $buildDeps \
-#&& cd /tmp/ && wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
-#&& python get-pip.py \
-#	--disable-pip-version-check \
-#    --no-cache-dir \
+&& cd /tmp/ && wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
+&& python get-pip.py \
 && pip install cython \
 && pip install \
     pymysql \
