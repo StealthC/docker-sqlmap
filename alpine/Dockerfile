@@ -17,6 +17,7 @@ RUN set -ex; \
 	; \
     pip2 install cython; \
     pip2 install \
+        SQLAlchemy \
         pymssql \
         pymysql \
         cx_oracle \

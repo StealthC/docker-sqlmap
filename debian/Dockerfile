@@ -7,7 +7,6 @@ RUN buildDeps=' \
     $buildDeps \
 && pip install \
     pymssql \
-    pymysql \
     psycopg2 \
     psycopg2-binary \
     ibm-db \
