@@ -4,7 +4,6 @@ RUN buildDeps=' \
         unixodbc-dev \
 	' \
 && apt-get update && apt-get install -y --no-install-recommends\
-    unixodbc \
     $buildDeps \
 && pip install \
     pymssql \
@@ -20,6 +19,8 @@ RUN buildDeps=' \
     sqlalchemy \
     mysql-python \
 && apt-get purge -y --auto-remove $buildDeps \
+&& apt-get install -y --no-install-recommends\
+    unixodbc \
 && rm -rf /tmp/* \
 && rm -rf /var/tmp/* \
 && rm -rf /var/lib/apt/lists/* \
