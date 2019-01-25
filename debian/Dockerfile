@@ -25,6 +25,7 @@ RUN buildDeps=' \
 && python get-pip.py \
 && pip install cython \
 && pip install \
+    SQLAlchemy \
     pymysql \
     cx_Oracle \
     ibm_db\
