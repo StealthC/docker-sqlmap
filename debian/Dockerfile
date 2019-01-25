@@ -1,59 +1,42 @@
-FROM debian:jessie
-
-LABEL Name="sqlmap with optional dependencies" Author="Carlos Alberto Castelo Elias Filho <cacefmail@gmail.com>"
+FROM python:2
 
 RUN buildDeps=' \
-        git \
-		wget \
-		python-dev \
-		build-essential \
-        freetds-dev \
         unixodbc-dev \
 	' \
 && apt-get update && apt-get install -y --no-install-recommends\
-    ca-certificates \
-    python \
-    python-psycopg2 \
-    python-impacket \
-    python-kinterbasdb \
-    python-ntlm \
-    libxml2 \
-    libsybdb5 \
     unixodbc \
     $buildDeps \
-&& cd /tmp/ && wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
-&& python get-pip.py \
-&& pip install cython \
 && pip install \
+    pymssql \
     pymysql \
-    cx_Oracle \
-    ibm_db\
+    psycopg2 \
+    psycopg2-binary \
+    ibm-db \
+    cx_oracle \
     jaydebeapi \
+    python-ntlm \
+    impacket \
     websocket-client \
-    pyodbc \
-    git+https://github.com/pymssql/pymssql.git \
-&& git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git /opt/sqlmap \
+    sqlalchemy \
+    mysql-python \
 && apt-get purge -y --auto-remove $buildDeps \
 && rm -rf /tmp/* \
 && rm -rf /var/tmp/* \
-&& rm -rf /var/lib/apt/lists/*
+&& rm -rf /var/lib/apt/lists/* \
+&& mkdir /work
 
-RUN chmod 755 /opt/sqlmap/sqlmap.py \
-&& mkdir /work \
-&& adduser -q --gecos "" --disabled-password --shell /bin/bash user \
-&& mkdir /home/user/.sqlmap \
-&& ln -s /home/user/.sqlmap /work \
-&& chown -R user /work \
-&& chown -R user /home/user
 
-USER user
+ENV SQLMAP_VERSION=1.3
+RUN mkdir /usr/src/sqlmap \
+    && curl -o sqlmap.tar.gz -fSL "https://github.com/sqlmapproject/sqlmap/archive/${SQLMAP_VERSION}.tar.gz" \
+    && tar -xvf sqlmap.tar.gz --strip 1 -C /usr/src/sqlmap \
+    && rm sqlmap.tar.gz
 
 WORKDIR /work
 
 VOLUME /work
 
-ENV PYTHONPATH=/usr/local/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages
-ENTRYPOINT ["python", "/opt/sqlmap/sqlmap.py", "--output-dir=/work"]
+ENTRYPOINT ["python2", "/usr/src/sqlmap/sqlmap.py", "--output-dir=/work"]
 
 CMD ["-hh"]
 
