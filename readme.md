@@ -27,7 +27,3 @@ docker run --rm -it -v "$(pwd)/:/work/" stealthc/sqlmap -u http://vuln.site.com/
 Where `/work/` is the container's default directory of the output logs, databases and dumps.
 
 In this example, the current directory `{?PWD}` is mounted at the desired place.
-
-## Authors
-
-* **Carlos Alberto Castelo Elias Filho** - [StealthC](https://github.com/StealthC)
